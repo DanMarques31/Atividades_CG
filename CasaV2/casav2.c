@@ -1,6 +1,3 @@
-// Daniel Luiz Araújo Marques
-// matrícula: 212050081
-
 #include <GL/glut.h>
 #include <math.h>
 
@@ -68,85 +65,100 @@ void Desenha(void)
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glTranslatef(windowWidth / 2, windowHeight / 2, 0);
+    // Deslocamento da casa para o centro da tela
+    glTranslatef(windowWidth/2, windowHeight/2, 0);
 
-    float escala = 50.0f;
-
-    // PAREDE FRONTAL
+    // ==========================
+    // PAREDE LATERAL AMARELA
+    // ==========================
     glPushMatrix();
-        glColor3f(1.0f, 1.0f, 0.2f);
-        glTranslatef(-0.5f * escala, -0.5f * escala, 0);
-        glScalef(1.0f * escala, 1.0f * escala, 1);
+        glColor3f(1.0f, 1.0f, 0.0f); // Amarelo
+        glTranslatef(0.75f, -0.5f, 0.0f);
+        glScalef(1.5f, 1.0f, 1.0f);
+        skewX(-0.5f); // Inclinação da lateral
         desenhaQuadrado();
     glPopMatrix();
 
+    // ==========================
+    // PAREDE FRONTAL AMARELA
+    // ==========================
+    glPushMatrix();
+        glColor3f(1.0f, 1.0f, 0.0f); // Amarelo
+        glTranslatef(-0.5f, -0.5f, 0.0f);
+        glScalef(1.0f, 1.0f, 1.0f);
+        desenhaQuadrado();
+    glPopMatrix();
+
+    // ==========================
     // PORTA
+    // ==========================
     glPushMatrix();
-        glColor3f(0.4f, 0.2f, 0.0f);
-        glTranslatef(-0.5f * escala, -0.75f * escala, 0);
-        glScalef(0.2f * escala, 0.5f * escala, 1);
+        glColor3f(0.4f, 0.2f, 0.0f); // Marrom
+        glTranslatef(-0.5f, -0.7f, 0.0f);
+        glScalef(0.2f, 0.6f, 1.0f);
         desenhaQuadrado();
     glPopMatrix();
 
-    // TELHADO FRONTAL
-    glPushMatrix();
-        glColor3f(0.6f, 0.3f, 0.1f);
-        glTranslatef(-0.5f * escala, 0.5f * escala, 0);
-        glScalef(1.0f * escala, 1.0f * escala, 1);
-        desenhaTriangulo();
-    glPopMatrix();
-
-    // CÍRCULO DO TELHADO
-    glPushMatrix();
-        glColor3f(1.0f, 1.0f, 0.0f);
-        glTranslatef(-0.5f * escala, 0.5f * escala, 0);
-        glScalef(0.15f * escala, 0.15f * escala, 1);
-        desenhaCirculo();
-    glPopMatrix();
-
-    // PAREDE LATERAL
-    glPushMatrix();
-        glColor3f(1.0f, 0.9f, 0.0f);
-        glTranslatef(0.75f * escala, -0.5f * escala, 0);
-        glScalef(1.5f * escala, 1.0f * escala, 1);
-        //skewX(-0.3f);
-        desenhaQuadrado();
-    glPopMatrix();
-
-
-    // TELHADO LATERAL
-    glPushMatrix();
-        glColor3f(0.8f, 0.4f, 0.1f);
-        glTranslatef(0.5f * escala, 0.5f * escala, 0);
-        glScalef(1.5f * escala, 1.0f * escala, 1);
-        skewX(-0.32f);
-        desenhaQuadrado();
-    glPopMatrix();
-
-
+    // ==========================
     // JANELAS
+    // ==========================
     for (int i = 0; i < 2; i++) {
         glPushMatrix();
-            glColor3f(0.0f, 1.0f, 1.0f);
-            glTranslatef((0.3f + i * 0.4f) * escala, -0.35f * escala, 0);
-            glScalef(0.3f * escala, 0.3f * escala, 1);
+            glColor3f(0.0f, 1.0f, 1.0f); // Azul claro
+            glTranslatef(0.2f + i*0.4f, -0.3f, 0.0f);
+            glScalef(0.3f, 0.3f, 1.0f);
             desenhaQuadrado();
         glPopMatrix();
     }
 
-    // CHAMINÉ BASE
+    // ==========================
+    // TELHADO FRONTAL
+    // ==========================
     glPushMatrix();
-        glColor3f(0.4f, 0.2f, 0.0f);
-        glTranslatef(0.9f * escala, 0.9f * escala, 0);
-        glScalef(0.1f * escala, 0.4f * escala, 1);
+        glColor3f(0.8f, 0.4f, 0.0f); // Laranja
+        glTranslatef(-0.5f, 0.0f, 0.0f);
+        glScalef(1.0f, 1.0f, 1.0f);
+        desenhaTriangulo();
+    glPopMatrix();
+
+    // ==========================
+    // TELHADO LATERAL
+    // ==========================
+    glPushMatrix();
+        glColor3f(0.8f, 0.4f, 0.0f); // Laranja
+        glTranslatef(0.75f, 0.0f, 0.0f);
+        glScalef(1.5f, 1.0f, 1.0f);
+        skewX(-0.5f);  // mesma inclinação da parede lateral
         desenhaQuadrado();
     glPopMatrix();
 
-    // TOPO DA CHAMINÉ
+    // ==========================
+    // CÍRCULO DO TELHADO
+    // ==========================
     glPushMatrix();
-        glColor3f(0.8f, 0.4f, 0.0f);
-        glTranslatef(0.9f * escala, 1.15f * escala, 0);
-        glScalef(0.2f * escala, 0.1f * escala, 1);
+        glColor3f(1.0f, 1.0f, 0.0f); // Amarelo
+        glTranslatef(-0.5f, 0.0f, 0.0f);
+        glScalef(0.2f, 0.2f, 1.0f);
+        desenhaCirculo();
+    glPopMatrix();
+
+    // ==========================
+    // CHAMINÉ BASE
+    // ==========================
+    glPushMatrix();
+        glColor3f(0.4f, 0.2f, 0.0f); // Marrom
+        glTranslatef(0.4f, 0.6f, 0.0f);
+        glScalef(0.1f, 0.4f, 1.0f);
+        desenhaQuadrado();
+    glPopMatrix();
+
+    // ==========================
+    // TOPO DA CHAMINÉ
+    // ==========================
+    glPushMatrix();
+        glColor3f(0.8f, 0.4f, 0.0f); // Laranja
+        glTranslatef(0.4f, 0.85f, 0.0f);
+        glScalef(0.2f, 0.1f, 1.0f);
         desenhaQuadrado();
     glPopMatrix();
 
